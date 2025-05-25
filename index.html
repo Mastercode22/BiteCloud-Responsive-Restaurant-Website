@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BiteCloud</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/loved.png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top px-4 px-lg-5 py-3 py-lg-0 shadow-sm">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>BiteCloud</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="menu.html" class="nav-item nav-link">Menu</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="booking.html" class="dropdown-item">Booking</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary py-2 px-1.5">Book A Table</a>
+
+                    <!-- Cart Toggle Button -->
+                    <button id="cartToggleBtn" aria-label="Toggle Cart"
+                        style="position:fixed;top:20px;right:20px;z-index:1050;">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span id="cartCount">0</span>
+                    </button>
+
+                    <!-- Cart Sidebar -->
+                    <div id="cartSidebar" aria-hidden="true" aria-label="Shopping Cart"
+                        style="position:fixed;top:0;right:-350px;width:350px;height:100%;background:#fff;box-shadow:-2px 0 8px rgba(0,0,0,0.2);padding:24px;z-index:1100;transition:right 0.3s;">
+                        <h4>Your Cart</h4>
+                        <div id="cartItems">No items in cart.</div>
+                        <hr />
+                        <div>
+                            <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                        </div>
+                        <div>
+                            <span id="cartDiscount" style="color:rgb(136, 255, 0);"></span>
+                        </div>
+                        <div>
+                            <strong>Final: $<span id="cartFinal">0.00</span></strong>
+                        </div>
+                        <button id="checkoutBtn" class="btn btn-success mt-3">Checkout</button>
+                        <button id="closeCartBtn" class="btn btn-danger mt-3">Close Cart</button>
+                    </div>
+                    <!-- Checkout Form Modal -->
+                    <div id="checkoutModal"
+                        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:1200;align-items:center;justify-content:center;">
+                        <form id="checkoutForm"
+                            style="background:#fff;padding:32px;border-radius:8px;max-width:400px;width:90%;margin:auto;position:relative;">
+                            <h4>Checkout</h4>
+                            <div class="mb-3">
+                                <label for="userAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="userAddress" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="userEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPhone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="userPhone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paymentMethod" class="form-label">Payment Method</label>
+                                <select class="form-control" id="paymentMethod" required>
+                                    <option value="">Select</option>
+                                    <option value="card">Credit/Debit Card</option>
+                                    <option value="cod">Cash on Delivery</option>
+                                    <option value="upi">UPI</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Place Order</button>
+                            <button type="button" class="btn btn-secondary w-100 mt-2"
+                                id="closeCheckoutModal">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container my-5 py-5">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="display-3 text-white animated slideInLeft">
+                                Savor Every Bite<br>With Us
+                            </h1>
+                            <p class="text-white animated slideInLeft mb-4 pb-2">
+                                Discover a perfect blend of taste and tradition. From starters to desserts, every dish
+                                is made to delight your senses and leave you wanting more.
+                            </p>
+                            <a href="booking.html"
+                                class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A
+                                Table</a>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                            <img class="img-fluid" src="img/hero.png" alt="Delicious Meal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navbar & Hero End -->
+
+            <!-- Service Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="service-item rounded pt-3">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+                                    <h5>Master Chefs</h5>
+                                    <p>Our talented chefs bring years of culinary expertise and passion to every dish we
+                                        serve.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="service-item rounded pt-3">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
+                                    <h5>Quality Food</h5>
+                                    <p>We use only the freshest ingredients to craft delicious meals that satisfy every
+                                        craving.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="service-item rounded pt-3">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
+                                    <h5>Online Order</h5>
+                                    <p>Enjoy the convenience of easy online ordering from the comfort of your home or
+                                        office.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                            <div class="service-item rounded pt-3">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-headset text-primary mb-4"></i>
+                                    <h5>24/7 Service</h5>
+                                    <p>We’re here for you around the clock—ready to serve you anytime, day or night.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service End -->
+
+
+
+            <!-- About Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6">
+                            <div class="row g-3">
+                                <div class="col-6 text-start">
+                                    <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
+                                        src="img/about-1.jpg" alt="Chef preparing signature dish">
+                                </div>
+                                <div class="col-6 text-start">
+                                    <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
+                                        src="img/about-2.jpg" style="margin-top: 25%;"
+                                        alt="Fresh ingredients from local farms">
+                                </div>
+                                <div class="col-6 text-end">
+                                    <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s"
+                                        src="img/about-3.jpg" alt="Elegant restaurant interior">
+                                </div>
+                                <div class="col-6 text-end">
+                                    <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s"
+                                        src="img/about-4.jpg" alt="Happy customers enjoying meals">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5 class="section-title ff-secondary text-start text-primary fw-bold fs-20">About Us</h5>
+                            <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>BiteCloud</h1>
+                            <p class="mb-4">Founded in 2008, BiteCloud began as a small family-owned bistro with a
+                                passion for bringing global flavors to our community. What started as a humble kitchen
+                                with just four tables has blossomed into an award-winning culinary destination.</p>
+                            <p class="mb-4">We take pride in our farm-to-table philosophy, working directly with local
+                                growers to source the freshest seasonal ingredients. Every dish tells a story - blending
+                                traditional techniques with modern creativity to deliver unforgettable dining
+                                experiences.</p>
+                            <div class="row g-4 mb-4">
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                        <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">
+                                            15</h1>
+                                        <div class="ps-4">
+                                            <p class="mb-0">Years of</p>
+                                            <h6 class="text-uppercase mb-0">Culinary Excellence</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                        <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">
+                                            50</h1>
+                                        <div class="ps-4">
+                                            <p class="mb-0">World-Class</p>
+                                            <h6 class="text-uppercase mb-0">Culinary Artists</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-primary py-3 px-5 mt-2" href="about.html">Our Story</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- About End -->
+
+
+            <!-- Menu Start -->
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mb-5">
+                        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+                        <h1 class="mb-5">Most Popular Items</h1>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Breakfast Tab -->
+                        <div id="tab-1" class="tab-pane fade show active">
+                            <div class="row g-4">
+
+                                <!-- Avocado Toast -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Avocado Toast" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Avocado Toast</span><span class="text-primary">$9</span>
+                                            </h5>
+                                            <p class="card-text">Sourdough bread with smashed avocado, cherry tomatoes,
+                                                and feta cheese.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pancake Stack -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Pancake Stack" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Pancake Stack</span><span class="text-primary">$12</span>
+                                            </h5>
+                                            <p class="card-text">Fluffy buttermilk pancakes with maple syrup and fresh
+                                                berries.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Eggs Benedict -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Eggs Benedict" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Eggs Benedict</span><span class="text-primary">$14</span>
+                                            </h5>
+                                            <p class="card-text">English muffin with poached eggs, Canadian bacon, and
+                                                hollandaise sauce.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakfast Burrito -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1552582786-907f9f2a7951?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Breakfast Burrito" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Breakfast Burrito</span><span class="text-primary">$11</span>
+                                            </h5>
+                                            <p class="card-text">Flour tortilla stuffed with scrambled eggs, chorizo,
+                                                potatoes, and cheese.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Belgian Waffles -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Belgian Waffles" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Belgian Waffles</span><span class="text-primary">$10</span>
+                                            </h5>
+                                            <p class="card-text">Crispy waffles topped with whipped cream, chocolate
+                                                sauce, and strawberries.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Greek Yogurt Parfait -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Greek Yogurt Parfait" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Yogurt Parfait</span><span class="text-primary">$8</span>
+                                            </h5>
+                                            <p class="card-text">Greek yogurt layered with granola, honey, and mixed
+                                                berries.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Smoked Salmon Bagel -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Smoked Salmon Bagel" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Salmon Bagel</span><span class="text-primary">$13</span>
+                                            </h5>
+                                            <p class="card-text">Toasted bagel with cream cheese, smoked salmon, capers,
+                                                and red onion.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- French Toast -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="French Toast" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>French Toast</span><span class="text-primary">$10</span>
+                                            </h5>
+                                            <p class="card-text">Brioche bread dipped in cinnamon batter, served with
+                                                powdered sugar.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakfast Bowl -->
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card">
+                                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
+                                            class="card-img-top" alt="Breakfast Bowl" />
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>Power Bowl</span><span class="text-primary">$12</span>
+                                            </h5>
+                                            <p class="card-text">Quinoa, kale, sweet potatoes, avocado, and poached
+                                                eggs.</p>
+                                            <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Menu End -->
+
+
+
+            <!-- Reservation Start -->
+            <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <div class="video">
+                            <button type="button" class="btn-play" data-bs-toggle="modal"
+                                data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 bg-dark d-flex align-items-center">
+                        <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+                            <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
+                            <h1 class="text-white mb-4">Book A Table Online</h1>
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <label for="name">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="Your Email">
+                                            <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating date" id="date3" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" id="datetime"
+                                                placeholder="Date & Time" data-target="#date3"
+                                                data-toggle="datetimepicker" />
+                                            <label for="datetime">Date & Time</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="select1">
+                                                <option value="1">People 1</option>
+                                                <option value="2">People 2</option>
+                                                <option value="3">People 3</option>
+                                            </select>
+                                            <label for="select1">No Of People</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Special Request" id="message"
+                                                style="height: 100px"></textarea>
+                                            <label for="message">Special Request</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content rounded-0">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- 16:9 aspect ratio -->
+                            <div class="ratio ratio-16x9">
+                                <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
+                                    allowscriptaccess="always" allow="autoplay"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Reservation Start -->
+
+
+            <!-- Team Start -->
+            <div class="container-xxl pt-5 pb-3">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
+                        <h1 class="mb-5">Our Master Chefs</h1>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="team-item text-center rounded overflow-hidden">
+                                <div class="rounded-circle overflow-hidden m-4">
+                                    <img class="img-fluid" src="img/team-1.jpg" alt="">
+                                </div>
+                                <h5 class="mb-0">Full Name</h5>
+                                <small>Designation</small>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="team-item text-center rounded overflow-hidden">
+                                <div class="rounded-circle overflow-hidden m-4">
+                                    <img class="img-fluid" src="img/team-2.jpg" alt="">
+                                </div>
+                                <h5 class="mb-0">Full Name</h5>
+                                <small>Designation</small>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="team-item text-center rounded overflow-hidden">
+                                <div class="rounded-circle overflow-hidden m-4">
+                                    <img class="img-fluid" src="img/team-3.jpg" alt="">
+                                </div>
+                                <h5 class="mb-0">Full Name</h5>
+                                <small>Designation</small>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                            <div class="team-item text-center rounded overflow-hidden">
+                                <div class="rounded-circle overflow-hidden m-4">
+                                    <img class="img-fluid" src="img/team-4.jpg" alt="">
+                                </div>
+                                <h5 class="mb-0">Full Name</h5>
+                                <small>Designation</small>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-primary mx-1" href=""><i
+                                            class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Team End -->
+
+
+            <!-- Testimonial Start -->
+            <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="container">
+                    <div class="text-center">
+                        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
+                        <h1 class="mb-5">Our Clients Say!!!</h1>
+                    </div>
+                    <div class="owl-carousel testimonial-carousel">
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos
+                                labore diam</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg"
+                                    style="width: 50px; height: 50px;">
+                                <div class="ps-3">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <small>Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos
+                                labore diam</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg"
+                                    style="width: 50px; height: 50px;">
+                                <div class="ps-3">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <small>Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos
+                                labore diam</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg"
+                                    style="width: 50px; height: 50px;">
+                                <div class="ps-3">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <small>Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos
+                                labore diam</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg"
+                                    style="width: 50px; height: 50px;">
+                                <div class="ps-3">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <small>Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial End -->
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Contact Us</a>
+                            <a class="btn btn-link" href="">Reservation</a>
+                            <a class="btn btn-link" href="">Privacy Policy</a>
+                            <a class="btn btn-link" href="">Terms & Condition</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Accra Ghana</p>
+                            <p class="mb-2">
+                                <i class="fab fa-whatsapp me-2 text-success"></i>
+                                <a href="https://wa.me/233532622248" target="_blank">+233 532 622 248</a>
+                            </p>
+                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>emmanueltech1@gmail.com</p>
+                            <div class="d-flex pt-2">
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                            <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                            <p>09AM - 09PM</p>
+                            <h5 class="text-light fw-normal">Sunday</h5>
+                            <p>10AM - 08PM</p>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter
+                            </h4>
+                            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                            <div class="position-relative mx-auto" style="max-width: 400px;">
+                                <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
+                                    placeholder="Your email">
+                                <button type="button"
+                                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy; <a class="border-bottom" href="#">EmmanuelTech</a>, All Right Reserved.
+                                Designed By <a class="border-bottom"
+                                    href="https://emmanueltech1.netlify.app/">EmmanuelTech</a>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <div class="footer-menu">
+                                    <a href="">Home</a>
+                                    <a href="">Cookies</a>
+                                    <a href="">Help</a>
+                                    <a href="">FQAs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/counterup/counterup.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+        <script src="js/main.js"></script>
+</body>
+
+</html>

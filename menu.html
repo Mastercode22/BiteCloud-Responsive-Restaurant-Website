@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BiteCloud</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/loved.png">
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>BiteCloud</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="menu.html" class="nav-item nav-link active">Menu</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="booking.html" class="dropdown-item">Booking</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <a href="booking.html" class="btn btn-primary py-2 px-4">Book A Table</a>
+                </div>
+            </nav>
+            
+              <!-- Cart Toggle Button -->
+                    <button id="cartToggleBtn" aria-label="Toggle Cart"
+                        style="position:fixed;top:20px;right:20px;z-index:1050;">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span id="cartCount">0</span>
+                    </button>
+
+                    <!-- Cart Sidebar -->
+                    <div id="cartSidebar" aria-hidden="true" aria-label="Shopping Cart"
+                        style="position:fixed;top:0;right:-350px;width:350px;height:100%;background:#fff;box-shadow:-2px 0 8px rgba(0,0,0,0.2);padding:24px;z-index:1100;transition:right 0.3s;">
+                        <h4>Your Cart</h4>
+                        <div id="cartItems">No items in cart.</div>
+                        <hr />
+                        <div>
+                            <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                        </div>
+                        <div>
+                            <span id="cartDiscount" style="color:rgb(136, 255, 0);"></span>
+                        </div>
+                        <div>
+                            <strong>Final: $<span id="cartFinal">0.00</span></strong>
+                        </div>
+                        <button id="checkoutBtn" class="btn btn-success mt-3">Checkout</button>
+                        <button id="closeCartBtn" class="btn btn-danger mt-3">Close Cart</button>
+                    </div>
+                    <!-- Checkout Form Modal -->
+                    <div id="checkoutModal"
+                        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:1200;align-items:center;justify-content:center;">
+                        <form id="checkoutForm"
+                            style="background:#fff;padding:32px;border-radius:8px;max-width:400px;width:90%;margin:auto;position:relative;">
+                            <h4>Checkout</h4>
+                            <div class="mb-3">
+                                <label for="userAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="userAddress" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="userEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPhone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="userPhone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="paymentMethod" class="form-label">Payment Method</label>
+                                <select class="form-control" id="paymentMethod" required>
+                                    <option value="">Select</option>
+                                    <option value="card">Credit/Debit Card</option>
+                                    <option value="cod">Cash on Delivery</option>
+                                    <option value="upi">UPI</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Place Order</button>
+                            <button type="button" class="btn btn-secondary w-100 mt-2"
+                                id="closeCheckoutModal">Cancel</button>
+                        </form>
+                    </div>
+
+
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Food Menu</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Menu</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Menu Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+                    <h1 class="mb-5">Most Popular Items</h1>
+                </div>
+
+                <div class="tab-content">
+                    <!-- Breakfast Tab -->
+                    <div id="tab-1" class="tab-pane fade show active">
+                        <div class="row g-4">
+
+                            <!-- Avocado Toast -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Avocado Toast" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Avocado Toast</span><span class="text-primary">$9</span>
+                                        </h5>
+                                        <p class="card-text">Sourdough bread with smashed avocado, cherry tomatoes,
+                                            and feta cheese.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pancake Stack -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Pancake Stack" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Pancake Stack</span><span class="text-primary">$12</span>
+                                        </h5>
+                                        <p class="card-text">Fluffy buttermilk pancakes with maple syrup and fresh
+                                            berries.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eggs Benedict -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Eggs Benedict" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Eggs Benedict</span><span class="text-primary">$14</span>
+                                        </h5>
+                                        <p class="card-text">English muffin with poached eggs, Canadian bacon, and
+                                            hollandaise sauce.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Breakfast Burrito -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1730878423239-0fd430bbac37?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        class="card-img-top" alt="Breakfast Burrito" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Breakfast Burrito</span><span class="text-primary">$11</span>
+                                        </h5>
+                                        <p class="card-text">Flour tortilla stuffed with scrambled eggs, chorizo,
+                                            potatoes, and cheese.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Belgian Waffles -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Belgian Waffles" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Belgian Waffles</span><span class="text-primary">$10</span>
+                                        </h5>
+                                        <p class="card-text">Crispy waffles topped with whipped cream, chocolate
+                                            sauce, and strawberries.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Greek Yogurt Parfait -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Greek Yogurt Parfait" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Yogurt Parfait</span><span class="text-primary">$8</span>
+                                        </h5>
+                                        <p class="card-text">Greek yogurt layered with granola, honey, and mixed
+                                            berries.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Smoked Salmon Bagel -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Smoked Salmon Bagel" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Salmon Bagel</span><span class="text-primary">$13</span>
+                                        </h5>
+                                        <p class="card-text">Toasted bagel with cream cheese, smoked salmon, capers,
+                                            and red onion.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- French Toast -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="French Toast" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>French Toast</span><span class="text-primary">$10</span>
+                                        </h5>
+                                        <p class="card-text">Brioche bread dipped in cinnamon batter, served with
+                                            powdered sugar.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Breakfast Bowl -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card">
+                                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80"
+                                        class="card-img-top" alt="Breakfast Bowl" />
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Power Bowl</span><span class="text-primary">$12</span>
+                                        </h5>
+                                        <p class="card-text">Quinoa, kale, sweet potatoes, avocado, and poached
+                                            eggs.</p>
+                                        <button class="btn btn-primary add-to-cart-btn">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu End -->
+
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Reservation</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Accra Ghana</p>
+                        <p class="mb-2">
+                            <i class="fab fa-whatsapp me-2 text-success"></i>
+                            <a href="https://wa.me/233532622248" target="_blank">+233 532 622 248</a>
+                        </p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>emmanueltech1@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter
+                        </h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
+                                placeholder="Your email">
+                            <button type="button"
+                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">EmmanuelTech</a>, All Right Reserved.
+                            Designed By <a class="border-bottom"
+                                href="https://emmanueltech1.netlify.app/">EmmanuelTech</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
