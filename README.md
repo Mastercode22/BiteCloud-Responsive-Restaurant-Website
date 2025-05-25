@@ -16,3 +16,5 @@ Interactive food menu with add-to-cart visuals
 Chef and testimonial sections
 
 Clean, semantic code with Bootstrap 5
+
+![Screenshot_25-5-2025_172229_](https://github.com/user-attachments/assets/d0b0ad3d-4b05-46e1-89c4-77de8a95b055)
